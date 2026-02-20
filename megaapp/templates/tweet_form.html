@@ -1,0 +1,44 @@
+{% extends "Layout.html" %}
+{% block  title %}{% endblock   %}
+{% block content %}
+
+{% if form.instance.pk %}<h2 class='text-Bold'>Edit tweet</h2>{% else %}<h2>Create tweet</h2>{% endif %}
+<form method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+   {% comment %} <div class="mb-3">
+    <label class="form-label">Tweet</label>
+    {{ form.text }}
+    {{ form.text.errors }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Photo (optional)</label>
+    {{ form.photo }}
+    {{ form.photo.errors }}
+  </div>
+
+
+    <button class='btn btn-warning' type="submit">Submit</button> {% endcomment %}
+
+      <div class="mb-3">
+    <label class="form-label fw-semibold">Tweet</label>
+    <div class="form-control form-control-lg" rows="2">{{ form.text }}
+    {{ form.text.errors }}
+    </div>
+  </div>
+
+  <!-- Photo upload -->
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Photo (optional)</label>
+    {{ form.photo }}
+    {{ form.photo.errors }}
+  </div>
+
+  <!-- Submit -->
+  <button class="btn btn-success rounded-pill px-4">
+    Post Tweet
+  </button>
+</form>
+<br>
+<a class='btn btn-primary'href="{% url 'tweet_List'%}">Go to Display</a>
+{% endblock  %}

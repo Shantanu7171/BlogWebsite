@@ -1,0 +1,45 @@
+{% extends "Layout.html" %}
+{% block  title %}{% endblock   %}
+{% block content %}
+
+
+<a class="btn btn-primary row mb-4"href="{% url 'tweet_create'%}">create post</a>
+
+ 
+
+<div class="container">
+  <div class="row g-4 justify-content-center">   <!-- ROW OUTSIDE LOOP -->
+
+    {% for tweet in tweets %}
+      <div class="col-md-4 col-sm-6">            <!-- COLUMN INSIDE LOOP -->
+
+        <div class="card h-100">
+          {% if tweet.photo and tweet.photo.name %}
+            <img
+              src="{{ tweet.photo.url }}"
+              class="card-img-top w-100"
+              style="height: 260px; object-fit: cover;"
+              alt="Tweet image">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="card-title">{{ tweet.user }}</h5>
+            <p class="card-text">{{ tweet.text }}</p>
+            {% if tweet.user == user %}
+            <a href="{% url 'tweet_edit' tweet.id%}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'tweet_delete' tweet.id%}" class="btn btn-danger">Delete</a>
+            {% endif %}
+           
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+
+
+{% endblock  %}
